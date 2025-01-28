@@ -5,7 +5,7 @@ import boto3
 
 def compare_faces(sourceFile, targetFile):
 
-    session = boto3.Session()
+    session = boto3.Session(region_name='ap-northeast-1')
     client = session.client('rekognition')
 
     imageSource = open(sourceFile, 'rb')

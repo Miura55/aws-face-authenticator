@@ -1,6 +1,6 @@
+import os
+import subprocess
 import cv2
-import numpy as np
-
 
 
 def main():
@@ -24,7 +24,12 @@ def main():
 
         _, faces = face_detector.detect(img)
         faces = faces if faces is not None else []
-        
+
+        target_file = 'target.jpg'
+        if len(faces) > 0 and not os.path.isfile(target_file):
+            cv2.imwrite(target_file, img)
+            subprocess.Popen(['python', 'compare_face.py'])
+
         for face in faces:
             box = list(map(int, face[:4]))
             color = (0, 0, 255)
